@@ -1,0 +1,47 @@
+# Ignore Django related files and folders
+*.pyc
+__pycache__/
+db.sqlite3
+*.pyo
+*.pyc
+*.pyd
+
+# Ignore React related files and folders
+node_modules/
+build/
+*.log
+/.pnp
+.pnp.js
+
+
+# Ignore VS Code specific files
+.vscode/
+.idea/
+
+# Ignore any environment files
+env/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore package-lock files
+package-lock.json
+yarn.lock
+
+# Ignore macOS system files
+.DS_Store
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

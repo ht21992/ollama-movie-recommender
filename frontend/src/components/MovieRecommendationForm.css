@@ -1,0 +1,105 @@
+/* MovieRecommendationForm.css */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* Ensure both sections stretch to fill the height */
+  height: 100vh; /* Full height of the viewport */
+  transition: all 0.5s ease; /* Smooth transition for moving the form */
+}
+
+.form-container {
+  margin-top: 60px; /* Add margin to top */
+  max-width: 500px;
+  width: 100%;
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transition */
+}
+
+.response-container {
+  width: 500px; /* Fixed width for the response container */
+  height: 100%; /* Take the full height */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; /* Prevent the container from shrinking */
+  opacity: 0; /* Start hidden */
+  transform: translateY(20px); /* Slightly lower */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for visibility */
+}
+
+.response-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+  animation: fadeIn 0.5s forwards; /* Fade in effect for response message */
+}
+
+/* Animation class for moving form left */
+.response-received .form-container {
+  margin-right: 50px; /* Adjust to desired spacing */
+  transform: translateX(-20px); /* Add slight movement to the left */
+}
+
+.response-received .response-container {
+  opacity: 1; /* Make visible */
+  transform: translateY(0); /* Move to its position */
+}
+
+h2 {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  animation: fadeIn 1s ease-in;
+}
+
+.form-animation {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.form-control {
+  border-radius: 0.5rem;
+  border: 1px solid #ccc; /* Border color */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn {
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+@media (max-width: 576px) {
+  h2 {
+      font-size: 1.5rem;
+  }
+}
