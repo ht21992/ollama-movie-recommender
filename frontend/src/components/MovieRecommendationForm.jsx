@@ -101,7 +101,7 @@ const MovieRecommendationForm = () => {
   return (
     <div className={`container ${responseMessage ? "response-received" : ""}`}>
       <div className="form-container">
-        {/* <h2 className="text-center mb-4">Movie Recommendation</h2> */}
+        <h2 className="text-center mb-4">Movie Recommendation</h2>
         <form
           onSubmit={handleSubmit}
           className="bg-light p-4 rounded shadow form-animation"
