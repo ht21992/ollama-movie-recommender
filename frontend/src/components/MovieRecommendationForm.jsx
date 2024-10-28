@@ -4,10 +4,10 @@ import "./MovieRecommendationForm.css";
 import { countries } from "./countries";
 
 const MovieRecommendationForm = () => {
-  const [genre, setGenre] = useState("");
-  const [country, setCountry] = useState(null);
-  const [year, setYear] = useState("");
-  const [actor, setActor] = useState("");
+  const [genre, setGenre] = useState("Action");
+  const [country, setCountry] = useState( { label: "United States", value: "usa" });
+  const [year, setYear] = useState("2020");
+  const [actor, setActor] = useState("Tom Hardy");
   const [error, setError] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -63,18 +63,28 @@ const MovieRecommendationForm = () => {
       if (response.ok) {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-        let result = "";
+        let buffer = ""; // Buffer to accumulate chunks
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
-          const chunk = decoder.decode(value);
-          const jsonChunk = JSON.parse(chunk);
+          const chunk = decoder.decode(value, { stream: true }); // Multi bytes decoding
+          buffer += chunk;
 
-          if (jsonChunk.response) {
-            result += jsonChunk.response;
-            setResponseMessage((prev) => prev + jsonChunk.response);
+          let boundary;
+          while ((boundary = buffer.indexOf("\n")) !== -1) {
+            const jsonString = buffer.slice(0, boundary); // Extract the JSON string
+            buffer = buffer.slice(boundary + 1); // Remove parsed part from buffer
+
+            try {
+              const jsonChunk = JSON.parse(jsonString);
+              if (jsonChunk.response) {
+                setResponseMessage((prev) => prev + jsonChunk.response);
+              }
+            } catch (err) {
+              console.error("Failed to parse JSON chunk:", err);
+            }
           }
         }
       } else {
@@ -91,7 +101,7 @@ const MovieRecommendationForm = () => {
   return (
     <div className={`container ${responseMessage ? "response-received" : ""}`}>
       <div className="form-container">
-        <h2 className="text-center mb-4">Movie Recommendation</h2>
+        {/* <h2 className="text-center mb-4">Movie Recommendation</h2> */}
         <form
           onSubmit={handleSubmit}
           className="bg-light p-4 rounded shadow form-animation"

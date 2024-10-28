@@ -55,7 +55,7 @@ To run this project, you will need to install Ollama. Please follow the instruct
 
     npm install
 
-    npm start
+    npm run dev
 
     ```
 
